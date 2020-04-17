@@ -10,27 +10,30 @@ module.exports = {
 };
 
 function findProjects() {
-  db('Projects');
+  return db('Projects');
 }
 
 function findResources() {
-  db('Resources');
+  return db('Resources');
 }
 
 function findTasks() {
-  db('Tasks')
-    .select('Tasks.id', 'Projects.name as Project name', 'Projects.description as Project Description', 'Tasks.description', 'Tasks.notes', 'Tasks.completed')
+  return db('Tasks')
+    .select('Tasks.id', 'Projects.name as Project name', 'Projects.description as Project description', 'Tasks.description', 'Tasks.notes', 'Tasks.completed')
     .join('Projects', 'Tasks.project_id', 'Projects.id');
 }
 
-function addProject(project) {
-  
+async function addProject(project) {
+  const [id] = await db('Projects').insert(project, 'id');
+  return db('Projects').where('id', id);
 }
 
-function addResource(resource) {
-
+async function addResource(resource) {
+  const [id] = await db('Resources').insert(resource, 'id');
+  return db('Resources').where('id', id);
 }
 
-function addTask(task) {
-
+async function addTask(task) {
+  const [id] = await db('Tasks').insert(task, 'id');
+  return db('Tasks').where('id', id);
 }

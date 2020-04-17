@@ -5,7 +5,7 @@ exports.up = function(knex) {
       tbl.increments('id');
       tbl.string('name').notNullable().unique().index();
       tbl.text('description');
-      tbl.boolean('completed').defaultTo(0);
+      tbl.boolean('completed').defaultTo(false);
     })
 
     // tasks
@@ -14,7 +14,7 @@ exports.up = function(knex) {
       tbl.integer('project_id').notNullable().references('id').inTable('Projects').index();
       tbl.text('description').notNullable();
       tbl.text('notes');
-      tbl.boolean('completed').defaultTo(0);
+      tbl.boolean('completed').defaultTo(false);
     })
     
     // resources
