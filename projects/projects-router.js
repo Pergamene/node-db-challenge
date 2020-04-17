@@ -33,7 +33,6 @@ router.get('/resource', async (req, res) => {
 router.get('/task', async (req, res) => {
   try {
     const tasks = await Projects.findTasks();
-    console.log(tasks);
     if (tasks) {
       res.status(200).json(tasks);
     } else {
